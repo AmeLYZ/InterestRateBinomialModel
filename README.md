@@ -6,7 +6,7 @@
 
 ## 背景介绍
 我们知道在对债券定价的时候，运用同一个利率去贴现债券的现金流是不合适的。因此引入了收益率曲线，只要未来的现金流确定，就可以根据收益率曲线计算任何债券的价格。  
-![公式1]('https://github.com/AmeLYZ/InterestRateBinomialModel/blob/master/image/formula1.png')
+![公式1](image/formula1.png)
 但是分析嵌入期权的债券时,由于未来的现金流会变动,因此无法使用上述方法进行定价。  
 我们引入了 Interest rate model，假设利率水平变化符合布朗运动（随机对数正态模型），且利率波动率保持不变。通过当前的利率水平和利率波动率就能画出利率变化的二叉树。
 ## 步骤
@@ -30,9 +30,9 @@ SIGMA = 0.1  # volatility
 - 从现在起一年后的息票利息支付  
 
 在考虑利率波动性的情况下，需要首先确定一年后较高的一年期远期利率和一年后较低的远期利率。根据布朗运动的假设，有如下等量关系：  
-![公式2]('https://github.com/AmeLYZ/InterestRateBinomialModel/blob/master/image/formula2.png')
+![公式2](image/formula2.png)
 先将这两个数值假设出来（用作第二年的现金流贴现利率）。已知两年期的平价债券在第二年的时候债券价值为债券的执行价格加上当年的票息。通过远期利率贴现得到V_h和V_l。再将V_h和V_l贴现到第一年（已知当年的一年期远期利率），如果贴现结果等于债券价格（由于是平价发行，即为票面价值），说明假设的一年后较高的一年期远期利率和一年后较低的远期利率是合理的，否则重新假设直到合理为止。  
-![公式3]('https://github.com/AmeLYZ/InterestRateBinomialModel/blob/master/image/formula3.png')
+![公式3](image/formula3.png)
 由于利率与V_0的变化是反比例变化的（利率越高，V_0越低），因此可以运用二分法逐步逼近正解。
 计算出第一年的较高的一年期远期利率和一年后较低的远期利率后，用同样的方法利用三年期的平价债券计算第二年的一年期远期利率。  
 
@@ -45,7 +45,7 @@ SIGMA = 0.1  # volatility
 ## 程序说明
 ### 类
 构建了BMATRIX类，使用上三角矩阵储存二叉树。二叉树的节点使用NODE类储存。BLOCK类用于二叉树可视化，每一个BLOCK实例是一个节点。  
-![BLOCK类]('https://github.com/AmeLYZ/InterestRateBinomialModel/blob/master/image/image.png')
+![BLOCK类](image/image.png)
 ```Python
 class BLOCK(object):
     """Block Diagram"""
