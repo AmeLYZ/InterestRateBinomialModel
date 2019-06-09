@@ -45,7 +45,7 @@ SIGMA = 0.1  # volatility
 ## 程序说明
 ### 类
 构建了BMATRIX类，使用上三角矩阵储存二叉树。二叉树的节点使用NODE类储存。BLOCK类用于二叉树可视化，每一个BLOCK实例是一个节点。
-![BLOCK类]('image/image.png')
+![BLOCK类]('/image/image.png')
 ```Python
 class BLOCK(object):
     """Block Diagram"""
